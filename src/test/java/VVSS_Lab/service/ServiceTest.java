@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class ServiceTest {
 
     @Test
-    public void saveStudent() {
+    public void saveStudent1() {
         Validator<Student> studentValidator = new StudentValidator();
         Validator<Tema> temaValidator = new TemaValidator();
         Validator<Nota> notaValidator = new NotaValidator();
@@ -28,10 +28,6 @@ public class ServiceTest {
         NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
 
         Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
-        //UI consola = new UI(service);
-        //consola.run();
-
-        // Assignment 5
         boolean find = false;
         service.saveStudent("999", "John Doe", 931);
         for(Student s : service.findAllStudents())
@@ -40,8 +36,20 @@ public class ServiceTest {
                 find = true;
         }
         assertEquals(true,find);
-        service.saveStudent("999", "Doe", 931);
-        find = false;
+    }
+    @Test
+    public void saveStudent2() {
+        Validator<Student> studentValidator = new StudentValidator();
+        Validator<Tema> temaValidator = new TemaValidator();
+        Validator<Nota> notaValidator = new NotaValidator();
+
+        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
+        TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
+        NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
+
+        Service service = new Service(fileRepository1, fileRepository2, fileRepository3);
+
+        boolean find = false;
         for(Student s : service.findAllStudents())
         {
             if(s.getNume().equals("Doe"))
