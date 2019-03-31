@@ -148,56 +148,6 @@ public class AppTest
 
     @Test
     public void addStudentTest_validGroup() {
-        service.saveStudent("1","test",931,goodProfesor,goodEmail);
-        boolean found = false;
-        for (Student s:
-                service.findAllStudents()) {
-            if(s.getID().equals("1"))
-            {
-                if(s.getGrupa()==931)
-                {
-                    found = true;
-                }
-            }
-        }
-        assertTrue(found);
-    }
-
-    @Test
-    public void addStudentTest_validGroup_2() {
-        service.saveStudent("1","test",110,goodProfesor,goodEmail);
-        boolean found = false;
-        for (Student s:
-                service.findAllStudents()) {
-            if(s.getID().equals("1"))
-            {
-                if(s.getGrupa()==110)
-                {
-                    found = true;
-                }
-            }
-        }
-        assertTrue(found);
-    }
-    @Test
-    public void addStudentTest_validGroup_3() {
-        service.saveStudent("1","test",111,goodProfesor,goodEmail);
-        boolean found = false;
-        for (Student s:
-                service.findAllStudents()) {
-            if(s.getID().equals("1"))
-            {
-                if(s.getGrupa()==111)
-                {
-                    found = true;
-                }
-            }
-        }
-        assertTrue(found);
-    }
-
-    @Test
-    public void addStudentTest_validGroup_4() {
         service.saveStudent("1","test",937,goodProfesor,goodEmail);
         boolean found = false;
         for (Student s:
@@ -212,15 +162,32 @@ public class AppTest
         }
         assertTrue(found);
     }
+
     @Test
-    public void addStudentTest_validGroup_5() {
-        service.saveStudent("1","test",938,goodProfesor,goodEmail);
+    public void addStudentTest_validGroup_2() {
+        service.saveStudent("1","test",111,goodProfesor,goodEmail);
         boolean found = false;
         for (Student s:
                 service.findAllStudents()) {
             if(s.getID().equals("1"))
             {
-                if(s.getGrupa()==938)
+                if(s.getGrupa()==111)
+                {
+                    found = true;
+                }
+            }
+        }
+        assertTrue(found);
+    }
+    @Test
+    public void addStudentTest_validGroup_3() {
+        service.saveStudent("1","test",937,goodProfesor,goodEmail);
+        boolean found = false;
+        for (Student s:
+                service.findAllStudents()) {
+            if(s.getID().equals("1"))
+            {
+                if(s.getGrupa()==937)
                 {
                     found = true;
                 }
@@ -229,17 +196,18 @@ public class AppTest
         assertTrue(found);
     }
 
+
     @Test
     public void addStudentTest_invalidGroup() {
         try {
-            service.saveStudent("1", "test", 109, goodProfesor, goodEmail);
+            service.saveStudent("1", "test", 110, goodProfesor, goodEmail);
             fail("student added with wrong group");
         }
         catch (ValidationException exception){
             assertTrue(true);
         }
         try {
-            service.saveStudent("1", "test", 939, goodProfesor, goodEmail);
+            service.saveStudent("1", "test", 938, goodProfesor, goodEmail);
             fail("student added with wrong group");
         }
         catch (ValidationException exception){
