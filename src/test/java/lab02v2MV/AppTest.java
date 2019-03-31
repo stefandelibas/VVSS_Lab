@@ -110,6 +110,17 @@ public class AppTest
     }
 
     @Test
+    public void addStudentTest_invalidId() {
+        try {
+            service.saveStudent("", "test", 0, goodProfesor, goodEmail);
+            fail("the id cannot be empty string");
+        }
+        catch (ValidationException exception){
+            assertTrue(true);
+        }
+    }
+
+    @Test
     public void addStudentTest_validGroup() {
         service.saveStudent("1","test",935,goodProfesor,goodEmail);
         boolean found = false;
