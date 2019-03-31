@@ -196,6 +196,40 @@ public class AppTest
         assertTrue(found);
     }
 
+    @Test
+    public void addStudentTest_validGroup_4() {
+        service.saveStudent("1","test",112,goodProfesor,goodEmail);
+        boolean found = false;
+        for (Student s:
+                service.findAllStudents()) {
+            if(s.getID().equals("1"))
+            {
+                if(s.getGrupa()==112)
+                {
+                    found = true;
+                }
+            }
+        }
+        assertTrue(found);
+    }
+
+    @Test
+    public void addStudentTest_validGroup_5() {
+        service.saveStudent("1","test",936,goodProfesor,goodEmail);
+        boolean found = false;
+        for (Student s:
+                service.findAllStudents()) {
+            if(s.getID().equals("1"))
+            {
+                if(s.getGrupa()==936)
+                {
+                    found = true;
+                }
+            }
+        }
+        assertTrue(found);
+    }
+
 
     @Test
     public void addStudentTest_invalidGroup() {
