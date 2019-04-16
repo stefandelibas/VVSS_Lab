@@ -1,5 +1,6 @@
 package lab02v2MV;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -26,6 +27,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.util.Iterator;
 
 /**
  * Unit test for simple App.
@@ -99,6 +101,7 @@ public class AppTestAssignment {
         }
 
     }
+
     @Test
     public void addAssignment() {
         int result = service.saveTema("1","test assignment",10,7);
@@ -112,5 +115,60 @@ public class AppTestAssignment {
             }
         }
         assertTrue(found);
+    }
+
+    @Test
+    public void addAssignment_duplicates(){
+        service.saveTema("1","Descriere",10,8);
+        service.saveTema("1","Descriere",10,8);
+        int i = 0;
+        Iterator it=service.findAllTeme().iterator();
+        while(it.hasNext()) {
+            i++;
+            it.next();
+        }
+        assertEquals(1, i);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_id_null() {
+        service.saveTema(null, "Descriere", 10, 13);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_description_null() {
+        service.saveTema("2", null, 10, 13);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_description_empty() {
+        service.saveTema("1", "", 10, 13);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_deadline_less1(){
+        service.saveTema("1", "tema", 0, 10);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_deadline_greater14(){
+        service.saveTema("1", "tema", 15, 10);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_startline_less1(){
+        service.saveTema("1", "tema", 10, 0);
+    }
+
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_startline_greater14(){
+        service.saveTema("1", "tema", 10, 15);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void addAssignment_startline_greater_deadline(){
+        service.saveTema("1", "tema", 10, 12);
     }
 }

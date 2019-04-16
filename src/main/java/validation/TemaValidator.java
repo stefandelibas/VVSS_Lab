@@ -9,6 +9,9 @@ public class TemaValidator implements Validator<Tema> {
         if (tema.getDescriere() == null || tema.getDescriere().equals("")) {
             throw new ValidationException("Descriere invalida! \n");
         }
+        if (tema.getDeadline() <= tema.getStartline()){
+            throw new ValidationException("Deadline-ul trebuie sa fie dupa startline! \n");
+        }
         if (tema.getDeadline() < 1 || tema.getDeadline() > 14 || tema.getDeadline() < tema.getStartline()) {
             throw new ValidationException("Deadline invalid! \n");
         }
