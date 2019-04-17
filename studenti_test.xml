@@ -1,1 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Enititati/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entitati>
+<student ID="1">
+<Nume>test</Nume>
+<Grupa>936</Grupa>
+<Email>test@test.com</Email>
+<Profesor>Profesor</Profesor>
+</student>
+</Entitati>
