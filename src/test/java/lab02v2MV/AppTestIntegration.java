@@ -22,6 +22,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.util.Iterator;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -161,5 +162,86 @@ public class AppTestIntegration {
         }
         assertTrue(found);
     }
+
+    @Test
+    public void addStudentTest2() {
+        service.saveStudent("1","Nume",931,"profesor","mail@gmail.com");
+        boolean found = false;
+        for (Student s:
+                service.findAllStudents()) {
+            if(s.getID().equals("1"))
+            {
+                found = true;
+            }
+        }
+        assertTrue(found);
+    }
+
+    @Test
+    public void  addStudentAndAssignment() {
+        service.saveStudent("1", "Nume", goodGroup, goodProfesor, goodEmail);
+        service.saveTema("1", "test assignment", 10, 7);
+        service.saveNota("1", "1", 9, 8, "okay");
+
+        boolean found = false;
+        for (Nota n :
+                service.findAllNote()) {
+            if (n.getID().getObject1().equals("1") && n.getID().getObject2().equals("1")) {
+                found = true;
+            }
+        }
+        assertTrue(found);
+        found = false;
+        for (Nota n :
+                service.findAllNote()) {
+            if (n.getID().getObject1().equals("1") && n.getID().getObject2().equals("1")) {
+                found = true;
+            }
+        }
+        assertTrue(found);
+        found = false;
+        for (Tema t :
+                service.findAllTeme()) {
+            if (t.getID().equals("1")) {
+                found = true;
+            }
+        }
+        assertTrue(found);
+    }
+
+    @Test
+    public void addStudentAndAssignmentAndGrade() {
+        service.saveStudent("1","test",goodGroup,goodProfesor,goodEmail);
+        service.saveTema("1", "test assignment", 10, 7);
+        service.saveNota("1","1",9,8,"okay");
+
+        boolean found = false;
+        for (Nota n:
+                service.findAllNote()) {
+            if(n.getID().getObject1().equals("1") && n.getID().getObject2().equals("1"))
+            {
+                found = true;
+            }
+        }
+        assertTrue(found);
+        found = false;
+        for (Nota n:
+                service.findAllNote()) {
+            if(n.getID().getObject1().equals("1") && n.getID().getObject2().equals("1"))
+            {
+                found = true;
+            }
+        }
+        assertTrue(found);
+        found = false;
+        for (Tema t :
+                service.findAllTeme()) {
+            if (t.getID().equals("1")) {
+                found = true;
+            }
+        }
+        assertTrue(found);
+    }
+
 
 }
